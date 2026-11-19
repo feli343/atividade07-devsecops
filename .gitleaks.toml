@@ -1,0 +1,18 @@
+title = "Regras de secret scanning do projeto"
+
+[extend]
+useDefault = true  # mantém todas as regras padrão do Gitleaks
+
+[[rules]]
+id = "hardcoded-credential"
+description = "Credencial/senha/token literal no código"
+regex = '''(?i)(api[_-]?key|secret|passwd|password|token)\s*=\s*["'][A-Za-z0-9/+=_\-]{12,}["']'''
+tags = ["credential"]
+
+[allowlist]
+description = "Arquivos que não precisam ser varridos"
+paths = [
+  '''\.gitleaks\.toml$''',
+  '''\.semgrep/''',
+  '''scripts/demo\.sh$''',  # contém credenciais FALSAS usadas só na demonstração
+]
