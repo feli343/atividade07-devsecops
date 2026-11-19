@@ -5,6 +5,7 @@ WORKDIR /build
 RUN python -m venv /opt/venv
 COPY requirements.txt .
 RUN /opt/venv/bin/pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip setuptools>=78.1.1 urllib3>=2.8.0 msgpack>=1.2.3
 
 # ---- runtime: imagem final enxuta, sem root ----
 FROM python:3.13-slim-bookworm
