@@ -1,0 +1,29 @@
+rules:
+  - id: proibe-eval-exec
+    languages: [python]
+    severity: ERROR
+    message: "eval()/exec() permitem execução arbitrária de código (CWE-95)."
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: exec(...)
+
+  - id: proibe-shell-true
+    languages: [python]
+    severity: ERROR
+    message: "subprocess com shell=True permite command injection (CWE-78)."
+    pattern: subprocess.$FUNC(..., shell=True, ...)
+
+  - id: sql-injection-fstring
+    languages: [python]
+    severity: ERROR
+    message: "Consulta SQL montada com f-string/concatenação: use parâmetros (CWE-89)."
+    pattern-either:
+      - pattern: $CUR.execute(f"...")
+      - pattern: $CUR.execute("..." + $X)
+      - pattern: $CUR.execute("..." % $X)
+
+  - id: cors-aberto-para-todos
+    languages: [python]
+    severity: ERROR
+    message: "CORS liberado para qualquer origem (CWE-942)."
+    pattern: allow_origins=["*"]
