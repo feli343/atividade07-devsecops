@@ -1,4 +1,4 @@
-"""API de exemplo usada apenas para exercitar a esteira DevSecOps."""
+"""API de exemplo usada para exercitar a esteira DevSecOps."""
 from itertools import count
 
 from fastapi import FastAPI, HTTPException, Request
